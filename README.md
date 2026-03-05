@@ -40,20 +40,28 @@ Sviluppo di un'interfaccia di monitoraggio per la Stazione Spaziale Internaziona
 ## 03 — Progetto Principale: NASA 70
 **Modulo:** Interaction Design (CV429.01)
 
-### Concept: Oltre il Mito
-Il progetto indaga la transizione visiva tra l'immaginario spaziale speculativo (pre-conquista) e l'evidenza scientifica fornita dagli archivi NASA.
+Titolo: Oltre il Mito – Cronache visive della rivelazione planetaria
 
-> **Domanda di ricerca:** Come si è evoluta la percezione visiva dello spazio profondo dal mito alla documentazione misurabile?
+Obiettivo Divulgativo: Esplorare la transizione tra l'immaginario speculativo e l'evidenza scientifica fornita dalle missioni NASA, celebrando i 70 anni dell'agenzia (1958-2028).
 
-**Obiettivi del design:**
-1.  **Contrasto Storico:** Accostamento tra illustrazioni d'epoca e dati reali.
-2.  **Archivio Aperto:** Navigazione fluida attraverso i dataset multimediali NASA.
-3.  **Esperienza Narrativa:** Passaggio da visioni oniriche a precisione cartografica.
+Struttura dell'Esperienza (I tre Viaggi):
 
-**Specifiche Tecniche:**
-* **Stato:** In fase di sviluppo (Work in Progress).
-* **Librerie core:** GSAP per la gestione del tempo, Three.js per la visualizzazione spaziale.
+L'Immaginario: Un viaggio narrato attraverso le rappresentazioni oniriche e i miti dei pianeti, persistenti anche dopo l'inizio dell'era spaziale.
 
+
+L'Evidenza: Un secondo passaggio tecnico che utilizza esclusivamente archivi fotografici e dati fisici NASA.
+
+Il Merge: Un'esperienza automatizzata che sovrappone i due mondi, mostrando visivamente come la scienza abbia "corretto" il mito.
+
+
+Dati Utilizzati: 
+
+Archivi digitali NASA (immagini rover, mappe altimetriche, dataset atmosferici).
+
+Illustrazioni storiche e testi letterari pre-esplorazione.
+
+
+Target: Pubblico generalista ed entusiasti dello spazio.
 ---
 
 ## 04 — Stack Tecnologico
