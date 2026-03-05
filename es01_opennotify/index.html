@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA 70 // MISSION TRACKING ISS</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <style>
+        /* --- CORE STYLE MONOCROMATICO (SOLO NERO E VERDE FOSFORO) --- */
+        body, html {
+            margin: 0; padding: 0;
+            background-color: #000000;
+            color: #00FF00;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh; width: 100vw;
+            overflow: hidden;
+            text-transform: UPPERCASE;
+            font-weight: 300;
+        }
+
+        /* --- CRT SCREEN EFFECT --- */
+        #crt-tv-screen {
+            width: 100%; height: 100%;
+            position: relative;
+            display: flex; flex-direction: column;
+        }
+
+        #crt-tv-screen::before {
+            content: " "; display: block; position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(0, 255, 0, 0.02) 50%, rgba(0, 0, 0, 0.1) 50%);
+            z-index: 5000; background-size: 100% 3px; pointer-events: none;
+            animation: flicker 5s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.98; filter: brightness(1); } 
+            5% { opacity: 0.95; filter: brightness(0.95); } 
+            10% { opacity: 0.99; filter: brightness(1.05); } 
+            100% { opacity: 1; filter: brightness(1); }
+        }
+
+        /* --- FILETTI DI SEPARAZIONE (HUD DIVIDERS) --- */
+        .divider {
+            height: 1px; width: 100%;
+            background-color: #00FF00;
+            opacity: 0.6;
+            box-shadow: 0 0 5px #00FF00;
+        }
+
+        /* Cornice superiore e inferiore per racchiudere la mappa */
+        .hud-top-frame { position: absolute; top: 20px; left: 0; width: 100%; z-index: 1002; }
+        .hud-bottom-frame { position: absolute; bottom: 20px; left: 0; width: 100%; z-index: 1002; }
+
+        /* --- INTERFACE ELEMENTS --- */
+        #map-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        /* Rettangolo Telemetria Principale (Dimensioni ampie e termini completi) */
+        #hud-telemetry {
+            position: absolute;
+            top: 40px; left: 40px;
+            z-index: 1001;
+            background: #000000;
+            border: 1px solid #00FF00;
+            padding: 20px;
+            width: 280px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2), inset 0 0 10px rgba(0, 255, 0, 0.1);
+        }
+
+        .hud-row {
+            display: flex; justify-content: space-between;
+            margin-bottom: 10px; font-size: 12px; letter-spacing: 2px;
+            border-bottom: 1px dashed rgba(0, 255, 0, 0.3);
+            padding-bottom: 5px;
+        }
+        .hud-row:last-of-type { border-bottom: none; margin-bottom: 0; }
+
+        .hud-row span:last-child { font-weight: bold; text-shadow: 0 0 5px #00FF00; }
+
+        #follow-btn {
+            margin-top: 15px; width: 100%;
+            background: #000000; border: 1px solid #00FF00;
+            color: #00FF00; font-family: inherit; font-size: 11px;
+            padding: 10px; cursor: pointer; text-transform: uppercase;
+            letter-spacing: 2px; transition: all 0.2s;
+        }
+
+        #follow-btn.active { 
+            background: #00FF00; color: #000000; 
+            box-shadow: 0 0 15px #00FF00; font-weight: bold;
+        }
+
+        /* --- MINI RADAR CON MAPPA SINCRONIZZATA --- */
+        #radar-box {
+            position: absolute;
+            bottom: 40px; left: 40px;
+            z-index: 1001;
+            width: 180px; height: 180px;
+            background: #000000;
+            border: 1px solid #00FF00;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2), inset 0 0 20px rgba(0, 255, 0, 0.2);
+        }
+
+        /* Silhouette Mappa Mondiale nel Radar (Esattamente 2:1 ratio) */
+        .radar-map-bg {
+            position: absolute;
+            width: 100%; height: 50%; /* Mantieni le proporzioni esatte della mappa equirettangolare */
+            top: 25%; /* Centra verticalmente nel cerchio */
+            /* Filtro estremo per rendere l'SVG nero un verde fosforo puro */
+            filter: invert(48%) sepia(100%) saturate(7440%) hue-rotate(87deg) brightness(118%) contrast(119%);
+            opacity: 0.35;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/World_map_blank_without_borders.svg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        /* Mirino Centrale Radar */
+        .radar-crosshair {
+            position: absolute; width: 100%; height: 100%;
+            background: 
+                linear-gradient(to right, transparent 49.5%, rgba(0,255,0,0.4) 49.5%, rgba(0,255,0,0.4) 50.5%, transparent 50.5%),
+                linear-gradient(to bottom, transparent 49.5%, rgba(0,255,0,0.4) 49.5%, rgba(0,255,0,0.4) 50.5%, transparent 50.5%);
+        }
+
+        .radar-line {
+            position: absolute; width: 50%; height: 1px;
+            background: linear-gradient(to right, transparent, #00FF00);
+            top: 50%; left: 50%; transform-origin: left center;
+            animation: scan 3s linear infinite;
+            z-index: 10;
+        }
+
+        /* Blip del Satellite nel Radar */
+        .radar-blip {
+            position: absolute; width: 6px; height: 6px;
+            background: #00FF00; border-radius: 50%;
+            box-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00; z-index: 11;
+            transform: translate(-50%, -50%); /* Centratura precisa sulle coordinate */
+        }
+
+        @keyframes scan { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* Testi Angolari */
+        .corner-info { position: absolute; z-index: 1001; font-size: 11px; opacity: 0.8; letter-spacing: 1px; }
+        .top-right { top: 40px; right: 40px; text-align: right; }
+        .bottom-right { bottom: 40px; right: 40px; text-align: right; }
+
+        /* --- MAP TILES (SOLO VERDE E NERO) --- */
+        #map { width: 100%; height: 100%; background: #000000; }
+        .leaflet-tile {
+            /* Forza le mappe chiare a diventare un verde fluo su sfondo nero scuro */
+            filter: invert(100%) sepia(100%) hue-rotate(70deg) saturate(1000%) contrast(2) brightness(0.9) !important;
+        }
+        .leaflet-container { background: #000000 !important; }
+        .leaflet-control-attribution { display: none !important; }
+
+        .glowing-trail { filter: drop-shadow(0 0 5px #00FF00); }
+    </style>
+</head>
+<body>
+
+    <div id="crt-tv-screen">
+        
+        <div class="hud-top-frame"><div class="divider"></div></div>
+
+        <div id="hud-telemetry">
+            <div class="hud-row"><span>OBJECT</span><span>ISS (ZARYA)</span></div>
+            <div class="hud-row"><span>VELOCITY</span><span>27,600 KM/H</span></div>
+            <div class="hud-row"><span>ALTITUDE</span><span>418 KM</span></div>
+            <div class="hud-row"><span>LATITUDE</span><span id="lat">WAIT...</span></div>
+            <div class="hud-row"><span>LONGITUDE</span><span id="lon">WAIT...</span></div>
+            <button id="follow-btn">AUTO-TRACKING: OFF</button>
+        </div>
+
+        <div id="radar-box">
+            <div class="radar-map-bg"></div>
+            <div class="radar-crosshair"></div>
+            <div class="radar-line"></div>
+            <div id="radar-blip" class="radar-blip"></div>
+        </div>
+
+        <div class="corner-info top-right">
+            NASA MISSION CONTROL<br>PROJECT 70 // TERMINAL 01
+        </div>
+        <div class="corner-info bottom-right">
+            TIME SOURCE: ATOMIC CLOCK<br><span id="clock">00:00:00 UTC</span>
+        </div>
+
+        <div id="map-container">
+            <div id="map"></div>
+        </div>
+
+        <div class="hud-bottom-frame"><div class="divider"></div></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        const map = L.map('map', { center: [20, 0], zoom: 3, zoomControl: false, minZoom: 2 });
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png').addTo(map);
+
+        const issIcon = L.divIcon({
+            className: 'iss-icon',
+            html: `<svg width="24" height="24" viewBox="0 0 100 100"><g stroke="#00FF00" stroke-width="6" fill="#000000"><line x1="10" y1="50" x2="90" y2="50" /><rect x="15" y="20" width="12" height="60" /><rect x="73" y="20" width="12" height="60" /><rect x="38" y="40" width="24" height="20" /></g></svg>`,
+            iconSize: [24, 24], iconAnchor: [12, 12]
+        });
+
+        let issMarker = L.marker([0, 0], { icon: issIcon }).addTo(map);
+        let trail = L.polyline([], {color: '#00FF00', weight: 2, className: 'glowing-trail'}).addTo(map);
+        let path = [];
+        let autoFollow = false;
+
+        function updateClock() {
+            document.getElementById('clock').innerText = new Date().toISOString().split('T')[1].split('.')[0] + " UTC";
+        }
+        setInterval(updateClock, 1000);
+
+        async function fetchISS() {
+            try {
+                const res = await fetch('http://api.open-notify.org/iss-now.json');
+                const data = await res.json();
+                const lat = parseFloat(data.iss_position.latitude);
+                const lon = parseFloat(data.iss_position.longitude);
+                
+                issMarker.setLatLng([lat, lon]);
+                path.push([lat, lon]);
+                if (path.length > 150) path.shift();
+                trail.setLatLngs(path);
+                
+                document.getElementById('lat').innerText = lat.toFixed(4);
+                document.getElementById('lon').innerText = lon.toFixed(4);
+
+                // --- CALCOLO MATEMATICO PRECISO PER IL RADAR ---
+                // Il radar è 180x180 px. La mappa interna è larga 180px e alta 90px (rapporto 2:1), centrata verticalmente (Y parte da 45px).
+                const radarSize = 180;
+                const mapWidth = radarSize;
+                const mapHeight = radarSize / 2; // 90px
+                const mapOffsetY = (radarSize - mapHeight) / 2; // 45px di margine sopra
+
+                const blip = document.getElementById('radar-blip');
+                
+                // Mappatura lineare da coordinate geografiche a pixel del radar
+                // Longitudine: da -180 a 180 mappata su larghezza da 0 a 180px
+                const x = ((lon + 180) / 360) * mapWidth;
+                
+                // Latitudine: da 90 a -90 mappata su altezza da 0 a 90px (invertita)
+                const y = ((90 - lat) / 180) * mapHeight + mapOffsetY;
+                
+                blip.style.left = x + 'px';
+                blip.style.top = y + 'px';
+
+                if (autoFollow) map.panTo([lat, lon]);
+            } catch (e) { console.warn("SIGNAL LOST"); }
+        }
+
+        const btn = document.getElementById('follow-btn');
+        btn.onclick = () => {
+            autoFollow = !autoFollow;
+            btn.classList.toggle('active');
+            btn.innerText = autoFollow ? "AUTO-TRACKING: ON" : "AUTO-TRACKING: OFF";
+            if(autoFollow) map.setZoom(5);
+        };
+
+        setInterval(fetchISS, 3000);
+        fetchISS();
+    </script>
+</body>
+</html>
