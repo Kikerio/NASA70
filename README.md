@@ -1,4 +1,4 @@
-# Media Interaction SP25/26
+# MEDIA INTERACTION II
 ### Università SUPSI — Visual Communication
 
 Repository ufficiale dedicato al corso di **Media Interaction**, anno accademico 2025/2026. Il progetto raccoglie lo sviluppo tecnico, la ricerca metodologica e i deliverable finali.
