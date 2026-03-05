@@ -18,8 +18,8 @@ Breve overview degli esercizi principali.
 
   - **Obiettivo:** esercizio introduttivo di tracciamento in tempo reale della posizione della Stazione Spaziale Internazionale.  
   - **Tecnologie:** HTML, CSS, JavaScript, eventuali API per il tracking satellitare.
-  - **Link:** http://127.0.0.1:5500/es01_opennotify/index.html
-
+  - **Link:** https://kikerio.github.io/NASA70/iss_tracking/index.html
+    
 ## 🚀 Progetti
 
 ### Progetto 01 – NASA 70
