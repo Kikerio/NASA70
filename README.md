@@ -1,57 +1,72 @@
-# media-interaction_sp2526
+# Media Interaction SP25/26
+### Università SUPSI — Visual Communication
 
-Repository per il corso di **Media Interaction SP25/26** (SUPSI) – esercizi, prove e progetti.
+Repository ufficiale dedicato al corso di **Media Interaction**, anno accademico 2025/2026. Il progetto raccoglie lo sviluppo tecnico, la ricerca metodologica e i deliverable finali.
 
-## 📁 Struttura del repository
+---
 
-- `/esercizi/` – esercizi settimanali e sperimentazioni  
-- `/progetti/` – progetti principali del corso  
-- `/assets/` – immagini, video, font e altri file di supporto  
-- `/docs/` – documentazione, bozze e note  
+## 00 — Indice dei Contenuti
+* [Struttura del Repository](#01--struttura-del-repository)
+* [Esercitazioni](#02--esercitazioni)
+* [Progetto Principale: NASA 70](#03--progetto-principale-nasa-70)
+* [Stack Tecnologico](#04--stack-tecnologico)
 
-## 🧪 Esercizi
+---
 
-Breve overview degli esercizi principali.
+## 01 — Struttura del Repository
 
-- **Esercizio 01 – tracking satellite ISS**  
-  <img width="1499" height="863" alt="M I II_Es-01" src="https://github.com/user-attachments/assets/97fb70ea-554d-4123-b6f6-7951e65f578b" />
+| Directory | Contenuto |
+| :--- | :--- |
+| `esercizi/` | Sperimentazioni settimanali e micro-interazioni. |
+| `progetti/` | Repository dei progetti principali (NASA 70). |
+| `assets/` | Risorse statiche: immagini, video e database locali. |
+| `docs/` | Documentazione di progetto e analisi teoriche. |
 
-  - **Obiettivo:** esercizio introduttivo di tracciamento in tempo reale della posizione della Stazione Spaziale Internazionale.  
-  - **Tecnologie:** HTML, CSS, JavaScript, eventuali API per il tracking satellitare.  
-  - **Link:** https://kikerio.github.io/NASA70/iss_tracking/index.html
-    
-## 🚀 Progetti
+---
 
-### Progetto 01 – NASA 70
+## 02 — Esercitazioni
 
-#### 00 — Brief del progetto
+### Es-01: ISS Real-time Tracking
+Sviluppo di un'interfaccia di monitoraggio per la Stazione Spaziale Internazionale (ISS).
 
-Progetto del corso **Interaction Design (CV429.01)**: realizzare una pagina web divulgativa che usa gli archivi digitali della NASA (immagini, video, dati, documenti) per raccontare la conquista dello spazio a un pubblico generalista e curioso, con un’idea di visualizzazione chiara, coerente e ben contestualizzata.
+* **Focus:** Fetching di dati dinamici e visualizzazione cartografica.
+* **Tecnologie:** Vanilla JavaScript, API REST.
+* **Preview:** [Visualizza Progetto](https://kikerio.github.io/NASA70/iss_tracking/index.html)
 
-#### 01 — Concept personale
+<img src="https://github.com/user-attachments/assets/97fb70ea-554d-4123-b6f6-7951e65f578b" width="100%" alt="ISS Tracking Interface" />
 
-|— Il mio concept parte da una domanda: _come si immaginava lo spazio prima di poterlo davvero vedere?_  
-|— L’obiettivo è mettere in relazione:  
-&nbsp;&nbsp;&nbsp;&nbsp;|— l’**immaginario pre-conquista** (illustrazioni, poster, cinema, fantascienza, visioni speculative dello spazio)  
-&nbsp;&nbsp;&nbsp;&nbsp;|— con le **immagini e i dati reali** prodotti dalla NASA dopo l’inizio dell’esplorazione spaziale  
+---
 
-|— La pagina web diventa così uno spazio narrativo che mostra il passaggio dallo **spazio come mito e fantasia** allo **spazio come realtà documentata e misurabile**, lavorando sul contrasto visivo e concettuale tra queste due epoche.
+## 03 — Progetto Principale: NASA 70
+**Modulo:** Interaction Design (CV429.01)
 
-#### 02 — Dettagli progetto
+### Concept: Oltre il Mito
+Il progetto indaga la transizione visiva tra l'immaginario spaziale speculativo (pre-conquista) e l'evidenza scientifica fornita dagli archivi NASA.
 
-|— **Tecnologie:** HTML, CSS, JavaScript (eventuali librerie come p5.js, Three.js, GSAP, ecc.).  
-|— **Stato:** in corso.  
-|— **Demo:** link (da aggiungere).  
-|— **Screenshot:** da aggiungere (work in progress).  
+> **Domanda di ricerca:** Come si è evoluta la percezione visiva dello spazio profondo dal mito alla documentazione misurabile?
 
-## 🛠 Tecnologie & strumenti
+**Obiettivi del design:**
+1.  **Contrasto Storico:** Accostamento tra illustrazioni d'epoca e dati reali.
+2.  **Archivio Aperto:** Navigazione fluida attraverso i dataset multimediali NASA.
+3.  **Esperienza Narrativa:** Passaggio da visioni oniriche a precisione cartografica.
 
-|— JavaScript  
-|— p5.js / Three.js (se utilizzate)  
-|— HTML / CSS  
-|— GitHub / Git  
+**Specifiche Tecniche:**
+* **Stato:** In fase di sviluppo (Work in Progress).
+* **Librerie core:** GSAP per la gestione del tempo, Three.js per la visualizzazione spaziale.
+
+---
+
+## 04 — Stack Tecnologico
+
+| Layer | Strumenti |
+| :--- | :--- |
+| **Logic** | JavaScript ES6+ |
+| **Styling** | CSS3 (Modern layouts, Grid, Flexbox) |
+| **Graphics** | p5.js / Three.js |
+| **Workflow** | Git, GitHub, Visual Studio Code |
+
+---
 
 ## 👤 Autrice
-
-- **Nome:** Michelle Chicherio  
-- **Ruolo:** Studentessa Visual Communication, SUPSI
+**Michelle Chicherio** Studentessa di Comunicazione Visiva  
+SUPSI — Mendrisio, Svizzera
