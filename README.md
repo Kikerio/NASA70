@@ -1,39 +1,39 @@
 # 🛸 OLTRE IL MITO
 ### Confronto dimensionale e cartografico tra immaginario e realtà scientifica.
 
-[cite_start]"Oltre il Mito" indaga l'evoluzione della nostra prospettiva spaziale attraverso i dati raccolti dalla NASA in 70 anni di attività[cite: 4, 6, 7]. [cite_start]Il progetto mette a confronto la struttura del sistema solare come veniva immaginata con l'evidenza scientifica delle dimensioni, collocazioni e distanze reali[cite: 9, 10, 25].
+"Oltre il Mito" indaga l'evoluzione della nostra prospettiva spaziale attraverso i dati raccolti dalla NASA in quasi 70 anni di attività. Il progetto mette a confronto la struttura del sistema solare come veniva immaginata con l'evidenza scientifica delle dimensioni, collocazioni e distanze reali.
 
 ---
 
 ## 01. CONCEPT
-L'esperienza si focalizza sulla "correzione" delle proporzioni spaziali. [cite_start]Attraverso un percorso guidato, l'utente scopre come la realtà fisica del cosmo differisca radicalmente dalle prime rappresentazioni speculative e cartografiche[cite: 10, 12].
+L'esperienza si focalizza sulla "correzione" delle proporzioni spaziali. Attraverso un percorso guidato, l'utente scopre come la realtà fisica del cosmo differisca radicalmente dalle prime rappresentazioni speculative e cartografiche prodotte prima della sistematica esplorazione spaziale.
 
 ---
 
 ## 02. STRUTTURA NARRATIVA
-Il progetto segue una sequenza lineare e comparativa:
+Il progetto segue una sequenza lineare e comparativa in tre fasi principali:
 
-1.  [cite_start]**L'UNIVERSO IMMAGINATO**: Visualizzazione della Via Lattea e del Sistema Solare secondo le concezioni storiche (proporzioni e collocazioni errate)[cite: 10, 12].
-2.  [cite_start]**FOCUS PLANETARIO**: Analisi singola dei pianeti chiave attraverso il confronto "Prima" (Mito) e "Dopo" (Dati NASA)[cite: 9, 25].
-3.  [cite_start]**L'UNIVERSO REALE**: Conclusione con la rivelazione della Via Lattea reale, basata sulle coordinate e scale effettive fornite dagli archivi NASA[cite: 7, 8, 25].
+1.  **L'UNIVERSO IMMAGINATO**: Visualizzazione iniziale del Sistema Solare e della Via Lattea secondo concezioni storiche e speculazioni visive (proporzioni, distanze e collocazioni errate).
+2.  **FOCUS PLANETARIO**: Un viaggio analitico attraverso i singoli pianeti. Per ogni tappa viene presentato un confronto diretto tra il "Prima" (rappresentazione basata sul mito o su osservazioni limitate) e il "Dopo" (modello basato sui dati effettivi NASA).
+3.  **L'UNIVERSO REALE**: Conclusione del viaggio con la rivelazione della Via Lattea reale, ricostruita secondo le scale e le coordinate fisiche fornite dagli archivi moderni.
 
 ---
 
 ## 03. ARCHIVIO DATI
-[cite_start]Il progetto attinge ai dataset ufficiali per garantire l'accuratezza del confronto[cite: 8, 22]:
+Il progetto utilizza archivi digitali ufficiali per garantire l'accuratezza del confronto scientifico:
 
-* [cite_start]**STORIA E IMMAGINARIO**: [NASA History](https://history.nasa.gov/) e [Internet Archive](https://archive.org/details/nasa) per le prime mappature e illustrazioni concettuali[cite: 26].
-* [cite_start]**EVIDENZA SCIENTIFICA**: [NASA Photojournal](https://science.nasa.gov/photojournal/) e [Planetary Data System (PDS)](https://pds.nasa.gov/) per dimensioni, mappe e coordinate reali[cite: 8, 26].
+* **STORIA E IMMAGINARIO**: Ricerca basata su NASA History e Internet Archive per il recupero di mappature storiche e illustrazioni concettuali.
+* **EVIDENZA SCIENTIFICA**: Utilizzo del NASA Photojournal e del Planetary Data System (PDS) per l'estrazione di diametri reali, distanze orbitali e texture fotografiche HD.
 
 ---
 
 ## 04. TECNOLOGIE
-* [cite_start]**Grafica 3D**: Three.js (modellazione dei volumi e delle distanze).
-* [cite_start]**Animazioni**: GSAP (regia del viaggio tra i capitoli).
-* [cite_start]**Linguaggio**: HTML, CSS, JavaScript Vanilla[cite: 15, 25].
+* **Grafica 3D**: Three.js (per la modellazione dei volumi planetari e la gestione delle distanze).
+* **Animazioni**: GSAP (per la regia del movimento della camera tra le diverse scene).
+* **Linguaggio**: HTML, CSS, JavaScript Vanilla.
 
 ---
 
-[cite_start]**Corso**: Interaction Design (CV429.01) – SUPSI [cite: 1]  
-[cite_start]**Docenti**: Andreas Gysin, Giovanni Profeta [cite: 1]  
-[cite_start]**Deliverable**: Progetto 1 – La conquista dello spazio [cite: 3, 4]
+**Corso**: Interaction Design (CV429.01) – SUPSI  
+**Docenti**: Andreas Gysin, Giovanni Profeta  
+**Deliverable**: Progetto 1 – La conquista dello spazio
