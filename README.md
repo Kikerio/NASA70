@@ -1,56 +1,43 @@
 # 🛸 OLTRE IL MITO
-### Dalla speculazione onirica all'evidenza scientifica: 70 anni di sguardi NASA.
+### Comparazione visiva tra immaginario spaziale e dati scientifici NASA.
 
-"Oltre il Mito" indaga la metamorfosi della percezione visiva dello spazio profondo dal 1958 ad oggi. Il progetto mette in scena la "Grande Correzione": il passaggio critico tra il territorio simbolico dell'ignoto e la mappa geologica della scoperta.
-
----
-
-## 01. CONCEPT & VISIONE
-Il progetto celebra il settantesimo anniversario della NASA esplorando come la missione scientifica abbia trasformato i pianeti da proiezioni dell'anima a dati misurabili.
-
-* **IL MITO**: Lo spazio come confine dell'immaginazione, popolato da mappe speculative e sogni sci-fi.
-* **IL DATO**: Lo spazio come geografia fisica, rivelato dalla precisione delle sonde e dei rover NASA.
+[cite_start]"Oltre il Mito" è un'esperienza interattiva che mette a confronto la percezione speculativa dello spazio con l'evidenza fisica raccolta in 70 anni di missioni NASA[cite: 6, 7]. [cite_start]Il progetto si focalizza sulla "correzione" delle proporzioni: come immaginavamo le dimensioni e i pesi dei pianeti rispetto alla loro realtà misurabile[cite: 10, 25].
 
 ---
 
-## 02. STRUTTURA NARRATIVA (I TRE ATTI)
-L'esperienza si sviluppa attraverso una navigazione **"Cinema-Scroll"** automatizzata:
-
-1.  **ATTO I | IL SOGNO**: Visioni oniriche, poster vintage e territori simbolici pre-esplorazione.
-2.  **ATTO II | IL DATO**: La rivelazione scientifica. Fotografie HD, altimetrie e dataset atmosferici reali.
-3.  **ATTO III | SINTESI**: La sovrapposizione fluida. Un merge visivo che mostra la transizione della nostra conoscenza nel tempo.
+## 01. CONCEPT
+[cite_start]L'esperienza analizza lo scarto tra l'intuizione umana e la precisione dei dati scientifici[cite: 9]. [cite_start]Attraverso un percorso guidato, l'utente scopre come la realtà fisica (dimensioni, scala, gravità) differisca radicalmente dalle prime rappresentazioni grafiche e concettuali[cite: 10, 12].
 
 ---
 
-## 03. ARCHIVIO DATI (RESOURCES)
-Il progetto attinge direttamente dagli archivi digitali NASA per garantire l'accuratezza del contenuto divulgativo.
+## 02. STRUTTURA DEL CONFRONTO
+[cite_start]L'esperienza è basata su una comparazione diretta e semplificata[cite: 22, 25]:
 
-### 📜 STORIA E IMMAGINARIO (IL MITO)
-* **NASA History** – Documentazione delle prime missioni e concept originali.
-* **Internet Archive** – Collezioni multimediali storiche della NASA.
-* **Wikimedia Commons** – Immagini NASA con licenze d'uso libere.
-
-### 🔬 EVIDENZA SCIENTIFICA (IL DATO)
-* **NASA Photojournal** – Archivio principale delle missioni di esplorazione del sistema solare.
-* **Mars Rover Photos** – Immagini dai rover Curiosity, Perseverance, Spirit e Opportunity.
-* **LROC** – Mappe e immagini ad alta risoluzione della superficie lunare.
-* **Hubble & James Webb** – Immagini telescopiche e dataset scientifici.
-
-### 📐 MODELLI E ALTIMETRIE (DEM)
-* **PDS Geosciences** – Mappe altimetriche e dati geospaziali planetari.
-* **USGS Astrogeology** – Modelli di elevazione planetaria (DEM/GeoTIFF).
-* **LOLA & MOLA** – Dati laser altimetrici per Luna e Marte.
+* [cite_start]**IL PRIMA (PERCEZIONE)**: Rappresentazione dei pianeti basata su illustrazioni storiche e gerarchie visive arbitrarie (es. dimensioni basate sulla luminosità o sul mito)[cite: 10].
+* [cite_start]**IL DOPO (DATO NASA)**: Trasformazione dei volumi e delle distanze secondo i dati fisici effettivi estratti dagli archivi dell'agenzia[cite: 8, 22].
 
 ---
 
-## 04. TECNOLOGIE & OUTPUT
-* **Linguaggio**: HTML5, CSS3, JavaScript Vanilla.
-* **Grafica 3D**: Three.js (modellazione volumi planetari).
-* **Regia**: GSAP (gestione dei tempi e della camera).
-* **Target**: Pubblico generalista, curiosi ed entusiasti dello spazio.
+## 03. ARCHIVIO DATI
+[cite_start]Il progetto utilizza i dataset ufficiali per garantire l'accuratezza del confronto scientifico[cite: 8, 26]:
+
+### 🔭 REALTÀ SCIENTIFICA (IL DATO)
+* [cite_start]**NASA Photojournal** – Documentazione fotografica delle missioni esplorative[cite: 8].
+* [cite_start]**Planetary Data System (PDS)** – Dataset su dimensioni, masse e coordinate fisiche dei corpi celesti[cite: 22].
+* [cite_start]**LROC & Mars Rover Photos** – Evidenza visiva delle superfici planetarie reali[cite: 8].
+
+### 📜 STORIA E IMMAGINARIO (IL PRIMA)
+* [cite_start]**NASA History & Internet Archive** – Prime mappature e illustrazioni concettuali pre-esplorazione[cite: 8].
 
 ---
 
-**Corso**: Interaction Design (CV429.01) – SUPSI  
-**Docenti**: Andreas Gysin, Giovanni Profeta  
-**Deliverable**: Progetto 1 – La conquista dello spazio
+## 04. TECNOLOGIE
+* [cite_start]**Grafica 3D**: Three.js (per la comparazione dei volumi planetari)[cite: 15].
+* [cite_start]**Regia**: GSAP (per le transizioni fluide tra percezione e dato)[cite: 15].
+* [cite_start]**Linguaggio**: HTML, CSS, JavaScript Vanilla[cite: 15].
+
+---
+
+[cite_start]**Corso**: Interaction Design (CV429.01) – SUPSI [cite: 1]  
+[cite_start]**Docenti**: Andreas Gysin, Giovanni Profeta [cite: 1]  
+[cite_start]**Consegna**: Progetto 1 – La conquista dello spazio [cite: 3, 4]
