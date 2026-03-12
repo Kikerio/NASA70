@@ -1,80 +1,65 @@
-# Media Interaction SP25/26
-### Università SUPSI — Visual Communication
+## 🚀 Progetto 01 – NASA 70 · "Oltre il Mito"
 
-Repository ufficiale dedicato al corso di **Media Interaction**, anno accademico 2025/2026. Il progetto raccoglie lo sviluppo tecnico, la ricerca metodologica e i deliverable finali.
+### 1. Concept
 
----
+- **Focus:** evoluzione di come vediamo lo spazio (mito → dato scientifico)
+- **Idea chiave:** “Grande Correzione” – ciò che immaginavamo vs ciò che le missioni NASA hanno rivelato
+- **Obiettivo:** esperienza web divulgativa, narrativa e visiva
 
-## 00 — Indice dei Contenuti
-* [Struttura del Repository](#01--struttura-del-repository)
-* [Esercitazioni](#02--esercitazioni)
-* [Progetto Principale: NASA 70](#03--progetto-principale-nasa-70)
-* [Stack Tecnologico](#04--stack-tecnologico)
+### 2. Struttura esperienza
 
----
+- **Atto I – Età del sogno:** 
+  - illustrazioni, poster, fantascienza
+  - pianeti come territorio simbolico / emotivo
+- **Atto II – Età del dato:**
+  - immagini ad alta risoluzione
+  - mappe, altimetrie, dati atmosferici reali
+- **Atto III – Sintesi:**
+  - sovrapposizione mito + dati
+  - transizione visiva nel tempo
 
-## 01 — Struttura del Repository
+### 3. Fonti visive · "Mito"
 
-| Directory | Contenuto |
-| :--- | :--- |
-| `esercizi/` | Sperimentazioni settimanali e micro-interazioni. |
-| `progetti/` | Repository dei progetti principali (NASA 70). |
-| `assets/` | Risorse statiche: immagini, video e database locali. |
-| `docs/` | Documentazione di progetto e analisi teoriche. |
+- **NASA History / Internet Archive:** illustrazioni storiche, primi concept missioni  
+  - [NASA History](https://history.nasa.gov/)
+  - [Internet Archive – NASA](https://archive.org/details/nasa)
+- **Wikimedia Commons:** immagini NASA libere  
+  - [Wikimedia NASA](https://commons.wikimedia.org/wiki/Category:Files_from_NASA_with_known_IDs)
 
----
+### 4. Fonti visive · "Dato scientifico"
 
-## 02 — Esercitazioni
+- **Foto planetarie:**
+  - [NASA Photojournal](https://science.nasa.gov/photojournal/)
+  - [Mars Rover Photos](https://mars.nasa.gov/msl/multimedia/raw-images/)
+  - [LROC – Luna](https://lroc.sese.asu.edu/)
+- **Telescopi:**
+  - [Hubble](https://hla.stsci.edu/)
+  - [James Webb](https://mast.stsci.edu/)
 
-### Es-01: ISS Real-time Tracking
-Sviluppo di un'interfaccia di monitoraggio per la Stazione Spaziale Internazionale (ISS).
+### 5. Dati di terreno (DEM / altimetrie)
 
-* **Focus:** Fetching di dati dinamici e visualizzazione cartografica.
-* **Tecnologie:** Vanilla JavaScript, API REST.
-* **Preview:** [Visualizza Progetto](https://kikerio.github.io/NASA70/iss_tracking/index.html)
+- [Planetary Data System Geosciences](https://pds-geosciences.wustl.edu/)
+- [USGS Astrogeology DEMs](https://astrogeology.usgs.gov/search)
+- [LOLA – Luna](https://imbrium.mit.edu)
+- [MOLA – Marte](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html)
+- [HiRISE DTM – Marte](https://hirise.lpl.arizona.edu/dtm/)
 
-<img src="https://github.com/user-attachments/assets/97fb70ea-554d-4123-b6f6-7951e65f578b" width="100%" alt="ISS Tracking Interface" />
+### 6. API e dati dinamici
 
----
+- [NASA Open APIs](https://api.nasa.gov/)
+  - APOD (Astronomy Picture of the Day)
+  - Mars Rover Photos
+  - EPIC (Terra in quasi real‑time)
 
-## 03 — Progetto Principale: NASA 70
-**Modulo:** Interaction Design (CV429.01)
+### 7. Tecnologie
 
-Titolo: Oltre il Mito – Cronache visive della rivelazione planetaria
+- **Frontend:** HTML, CSS, JavaScript
+- **Grafica 3D:** Three.js (volumi planetari)
+- **Animazioni / regia:** GSAP
+- **Git / GitHub:** versionamento e deploy (GitHub Pages)
 
-Obiettivo Divulgativo: Esplorare la transizione tra l'immaginario speculativo e l'evidenza scientifica fornita dalle missioni NASA, celebrando i 70 anni dell'agenzia (1958-2028).
+### 8. Ruolo del progetto
 
-Struttura dell'Esperienza (I tre Viaggi):
-
-L'Immaginario: Un viaggio narrato attraverso le rappresentazioni oniriche e i miti dei pianeti, persistenti anche dopo l'inizio dell'era spaziale.
-
-
-L'Evidenza: Un secondo passaggio tecnico che utilizza esclusivamente archivi fotografici e dati fisici NASA.
-
-Il Merge: Un'esperienza automatizzata che sovrappone i due mondi, mostrando visivamente come la scienza abbia "corretto" il mito.
-
-
-Dati Utilizzati: 
-
-Archivi digitali NASA (immagini rover, mappe altimetriche, dataset atmosferici).
-
-Illustrazioni storiche e testi letterari pre-esplorazione.
-
-
-Target: Pubblico generalista ed entusiasti dello spazio.
----
-
-## 04 — Stack Tecnologico
-
-| Layer | Strumenti |
-| :--- | :--- |
-| **Logic** | JavaScript ES6+ |
-| **Styling** | CSS3 (Modern layouts, Grid, Flexbox) |
-| **Graphics** | p5.js / Three.js |
-| **Workflow** | Git, GitHub, Visual Studio Code |
-
----
-
-## 👤 Autrice
-**Michelle Chicherio** Studentessa di Comunicazione Visiva  
-SUPSI — Mendrisio, Svizzera
+- **Corso:** Interaction Design (CV429.01) – SUPSI  
+- **Tema:** 70 anni NASA – mutazione dell’immaginario spaziale  
+- **Output:** pagina web narrativa + esplorazione libera finale
