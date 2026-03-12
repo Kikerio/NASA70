@@ -1,138 +1,54 @@
-Ecco la bozza del README aggiornata. Ho inserito una sezione dedicata alla **Navigazione** subito dopo la struttura, utilizzando uno stile asciutto e schematico come richiesto per il tuo dossier di progetto.
+# 🛸 OLTRE IL MITO
+### Dalla speculazione onirica all'evidenza scientifica: 70 anni di sguardi NASA.
+
+"Oltre il Mito" indaga la metamorfosi della percezione visiva dello spazio profondo dal 1958 ad oggi. [cite_start]Il progetto mette in scena la "Grande Correzione": il passaggio critico tra il territorio simbolico dell'ignoto e la mappa geologica della scoperta[cite: 4, 6, 7].
 
 ---
 
-## 🚀 Progetto 01 – NASA 70 · "Oltre il Mito"
-
-### 1. Concept
-
-* 
-**Focus:** Evoluzione di come vediamo lo spazio (mito → dato scientifico).
-
-
-* 
-**Idea chiave:** “Grande Correzione” – ciò che immaginavamo vs ciò che le missioni NASA hanno rivelato.
-
-
-* 
-**Obiettivo:** Esperienza web divulgativa, narrativa e visiva.
-
-
-
-### 2. Struttura esperienza
-
-* 
-**Atto I – Età del sogno:** Illustrazioni, poster, fantascienza; pianeti come territorio simbolico ed emotivo.
-
-
-* 
-**Atto II – Età del dato:** Immagini ad alta risoluzione, mappe, altimetrie e dati atmosferici reali.
-
-
-* 
-**Atto III – Sintesi:** Sovrapposizione mito + dati e transizione visiva nel tempo.
-
-
-
-### 3. Navigazione e Interazione
-
-* 
-**Modalità:** Esperienza "Cinema-Scroll" fluida e automatizzata.
-
-
-* 
-**Timeline Narrativa:** Lo scorrimento verticale (scroll) guida la camera 3D e attiva la voce fuori campo.
-
-
-* 
-**Controllo Utente:** L'utente può scegliere di seguire il flusso narrativo o passare alla modalità "Esplorazione Libera" per confrontare i dati tecnici.
-
-
-* 
-**Visual:** Transizioni cinematiche gestite da GSAP per il passaggio tra i tre capitoli (Sogno, Dato, Sintesi).
-
-
-
-### 4. Fonti visive · "Mito"
-
-* 
-**NASA History / Internet Archive:** Illustrazioni storiche e primi concept delle missioni.
-
-
-* 
-**Wikimedia Commons:** Immagini NASA libere da diritti.
-
-
-
-### 5. Fonti visive · "Dato scientifico"
-
-* 
-**Foto planetarie:** NASA Photojournal, Mars Rover Photos (Curiosity/Perseverance), LROC (Luna).
-
-
-* 
-**Telescopi:** Hubble Legacy Archive e James Webb Space Telescope.
-
-
-
-### 6. Dati di terreno (DEM / altimetrie)
-
-* 
-**Mapping:** Planetary Data System (PDS) e USGS Astrogeology per modelli di elevazione GeoTIFF.
-
-
-* 
-**Specifiche:** LOLA (Luna), MOLA (Marte) e HiRISE DTM.
-
-
-
-### 7. API e dati dinamici
-
-* 
-**NASA Open APIs:** Integrazione di APOD, Mars Rover Photos e immagini EPIC (Terra).
-
-
-
-### 8. Tecnologie
-
-* 
-**Frontend:** HTML, CSS, JavaScript.
-
-
-* 
-**Grafica 3D:** Three.js per la modellazione dei volumi planetari.
-
-
-* 
-**Animazioni / regia:** GSAP per la gestione temporale.
-
-
-* 
-**Git / GitHub:** Versionamento (GitHub Desktop) e pubblicazione (GitHub Pages).
-
-
-
-### 9. Ruolo del progetto
-
-* 
-**Corso:** Interaction Design (CV429.01) – SUPSI.
-
-
-* 
-**Docenti:** Andreas Gysin, Giovanni Profeta.
-
-
-* 
-**Tema:** 70 anni NASA – Mutazione dell’immaginario spaziale.
-
-
-* 
-**Output:** Pagina web narrativa con documentazione pubblicata online.
-
-
+## 01. CONCEPT & VISIONE
+[cite_start]Il progetto celebra il settantesimo anniversario della NASA esplorando come la missione scientifica abbia trasformato i pianeti da proiezioni dell'anima a dati misurabili[cite: 6, 9].
+
+* [cite_start]**IL MITO**: Lo spazio come confine dell'immaginazione, popolato da mappe speculative e sogni sci-fi[cite: 10].
+* [cite_start]**IL DATO**: Lo spazio come geografia fisica, rivelato dalla precisione delle sonde e dei rover NASA[cite: 8, 10].
 
 ---
 
-**Vuoi che inizi a scrivere lo script narrativo per il Capitolo 1 (Marte - Il Sogno) o preferisci passare alla configurazione tecnica del repository GitHub?**
+## 02. STRUTTURA NARRATIVA (I TRE ATTI)
+L'esperienza si sviluppa attraverso una navigazione **"Cinema-Scroll"** automatizzata:
 
-*Seguimi su Instagram per vedere il dietro le quinte di "Oltre il Mito"!*
+1.  **ATTO I | IL SOGNO**: Visioni oniriche, poster vintage e territori simbolici pre-esplorazione.
+2.  **ATTO II | IL DATO**: La rivelazione scientifica. [cite_start]Fotografie HD, altimetrie e dataset atmosferici reali[cite: 8].
+3.  **ATTO III | SINTESI**: La sovrapposizione fluida. [cite_start]Un merge visivo che mostra la transizione della nostra conoscenza nel tempo[cite: 10].
+
+---
+
+## 03. ARCHIVIO DATI (RESOURCES)
+[cite_start]Il progetto attinge direttamente dagli archivi digitali NASA per garantire l'accuratezza del contenuto divulgativo[cite: 9, 22].
+
+### 📜 Storia e Immaginario (Il Mito)
+* [cite_start][NASA History](https://history.nasa.gov/) – Documentazione delle prime missioni e concept originali[cite: 6].
+* [Internet Archive](https://archive.org/details/nasa) – Collezioni multimediali storiche.
+* [cite_start][Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:Files_from_NASA_with_known_IDs) – Immagini NASA con licenze libere[cite: 26].
+
+### 🔬 Evidenza Scientifica (Il Dato)
+* [cite_start][NASA Photojournal](https://science.nasa.gov/photojournal/) – Archivio principale delle missioni planetarie[cite: 8].
+* [Mars Rover Photos](https://mars.nasa.gov/msl/multimedia/raw-images/) – Immagini dai rover Curiosity e Perseverance.
+* [LROC](https://lroc.sese.asu.edu/) – Mappe e immagini ad alta risoluzione della superficie lunare.
+
+### 📐 Modelli e Altimetrie (DEM)
+* [PDS Geosciences](https://pds-geosciences.wustl.edu/) – Mappe altimetriche per la ricostruzione 3D.
+* [USGS Astrogeology](https://astrogeology.usgs.gov/search) – Modelli di elevazione planetaria (DEM/GeoTIFF).
+
+---
+
+## 04. TECNOLOGIE & OUTPUT
+* [cite_start]**Linguaggio**: HTML5, CSS3, JavaScript Vanilla[cite: 15].
+* **Grafica 3D**: Three.js (modellazione volumi planetari).
+* **Regia**: GSAP (gestione dei tempi e della camera).
+* [cite_start]**Target**: Pubblico generalista, curiosi ed entusiasti dello spazio[cite: 13].
+
+---
+
+[cite_start]**Corso**: Interaction Design (CV429.01) – SUPSI [cite: 1]  
+[cite_start]**Docenti**: Andreas Gysin, Giovanni Profeta [cite: 1]  
+[cite_start]**Deliverable**: Progetto 1 – La conquista dello spazio [cite: 3, 4]
