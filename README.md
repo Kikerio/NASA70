@@ -1,65 +1,138 @@
+Ecco la bozza del README aggiornata. Ho inserito una sezione dedicata alla **Navigazione** subito dopo la struttura, utilizzando uno stile asciutto e schematico come richiesto per il tuo dossier di progetto.
+
+---
+
 ## 🚀 Progetto 01 – NASA 70 · "Oltre il Mito"
 
 ### 1. Concept
 
-- **Focus:** evoluzione di come vediamo lo spazio (mito → dato scientifico)
-- **Idea chiave:** “Grande Correzione” – ciò che immaginavamo vs ciò che le missioni NASA hanno rivelato
-- **Obiettivo:** esperienza web divulgativa, narrativa e visiva
+* 
+**Focus:** Evoluzione di come vediamo lo spazio (mito → dato scientifico).
+
+
+* 
+**Idea chiave:** “Grande Correzione” – ciò che immaginavamo vs ciò che le missioni NASA hanno rivelato.
+
+
+* 
+**Obiettivo:** Esperienza web divulgativa, narrativa e visiva.
+
+
 
 ### 2. Struttura esperienza
 
-- **Atto I – Età del sogno:** 
-  - illustrazioni, poster, fantascienza
-  - pianeti come territorio simbolico / emotivo
-- **Atto II – Età del dato:**
-  - immagini ad alta risoluzione
-  - mappe, altimetrie, dati atmosferici reali
-- **Atto III – Sintesi:**
-  - sovrapposizione mito + dati
-  - transizione visiva nel tempo
+* 
+**Atto I – Età del sogno:** Illustrazioni, poster, fantascienza; pianeti come territorio simbolico ed emotivo.
 
-### 3. Fonti visive · "Mito"
 
-- **NASA History / Internet Archive:** illustrazioni storiche, primi concept missioni  
-  - [NASA History](https://history.nasa.gov/)
-  - [Internet Archive – NASA](https://archive.org/details/nasa)
-- **Wikimedia Commons:** immagini NASA libere  
-  - [Wikimedia NASA](https://commons.wikimedia.org/wiki/Category:Files_from_NASA_with_known_IDs)
+* 
+**Atto II – Età del dato:** Immagini ad alta risoluzione, mappe, altimetrie e dati atmosferici reali.
 
-### 4. Fonti visive · "Dato scientifico"
 
-- **Foto planetarie:**
-  - [NASA Photojournal](https://science.nasa.gov/photojournal/)
-  - [Mars Rover Photos](https://mars.nasa.gov/msl/multimedia/raw-images/)
-  - [LROC – Luna](https://lroc.sese.asu.edu/)
-- **Telescopi:**
-  - [Hubble](https://hla.stsci.edu/)
-  - [James Webb](https://mast.stsci.edu/)
+* 
+**Atto III – Sintesi:** Sovrapposizione mito + dati e transizione visiva nel tempo.
 
-### 5. Dati di terreno (DEM / altimetrie)
 
-- [Planetary Data System Geosciences](https://pds-geosciences.wustl.edu/)
-- [USGS Astrogeology DEMs](https://astrogeology.usgs.gov/search)
-- [LOLA – Luna](https://imbrium.mit.edu)
-- [MOLA – Marte](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html)
-- [HiRISE DTM – Marte](https://hirise.lpl.arizona.edu/dtm/)
 
-### 6. API e dati dinamici
+### 3. Navigazione e Interazione
 
-- [NASA Open APIs](https://api.nasa.gov/)
-  - APOD (Astronomy Picture of the Day)
-  - Mars Rover Photos
-  - EPIC (Terra in quasi real‑time)
+* 
+**Modalità:** Esperienza "Cinema-Scroll" fluida e automatizzata.
 
-### 7. Tecnologie
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Grafica 3D:** Three.js (volumi planetari)
-- **Animazioni / regia:** GSAP
-- **Git / GitHub:** versionamento e deploy (GitHub Pages)
+* 
+**Timeline Narrativa:** Lo scorrimento verticale (scroll) guida la camera 3D e attiva la voce fuori campo.
 
-### 8. Ruolo del progetto
 
-- **Corso:** Interaction Design (CV429.01) – SUPSI  
-- **Tema:** 70 anni NASA – mutazione dell’immaginario spaziale  
-- **Output:** pagina web narrativa + esplorazione libera finale
+* 
+**Controllo Utente:** L'utente può scegliere di seguire il flusso narrativo o passare alla modalità "Esplorazione Libera" per confrontare i dati tecnici.
+
+
+* 
+**Visual:** Transizioni cinematiche gestite da GSAP per il passaggio tra i tre capitoli (Sogno, Dato, Sintesi).
+
+
+
+### 4. Fonti visive · "Mito"
+
+* 
+**NASA History / Internet Archive:** Illustrazioni storiche e primi concept delle missioni.
+
+
+* 
+**Wikimedia Commons:** Immagini NASA libere da diritti.
+
+
+
+### 5. Fonti visive · "Dato scientifico"
+
+* 
+**Foto planetarie:** NASA Photojournal, Mars Rover Photos (Curiosity/Perseverance), LROC (Luna).
+
+
+* 
+**Telescopi:** Hubble Legacy Archive e James Webb Space Telescope.
+
+
+
+### 6. Dati di terreno (DEM / altimetrie)
+
+* 
+**Mapping:** Planetary Data System (PDS) e USGS Astrogeology per modelli di elevazione GeoTIFF.
+
+
+* 
+**Specifiche:** LOLA (Luna), MOLA (Marte) e HiRISE DTM.
+
+
+
+### 7. API e dati dinamici
+
+* 
+**NASA Open APIs:** Integrazione di APOD, Mars Rover Photos e immagini EPIC (Terra).
+
+
+
+### 8. Tecnologie
+
+* 
+**Frontend:** HTML, CSS, JavaScript.
+
+
+* 
+**Grafica 3D:** Three.js per la modellazione dei volumi planetari.
+
+
+* 
+**Animazioni / regia:** GSAP per la gestione temporale.
+
+
+* 
+**Git / GitHub:** Versionamento (GitHub Desktop) e pubblicazione (GitHub Pages).
+
+
+
+### 9. Ruolo del progetto
+
+* 
+**Corso:** Interaction Design (CV429.01) – SUPSI.
+
+
+* 
+**Docenti:** Andreas Gysin, Giovanni Profeta.
+
+
+* 
+**Tema:** 70 anni NASA – Mutazione dell’immaginario spaziale.
+
+
+* 
+**Output:** Pagina web narrativa con documentazione pubblicata online.
+
+
+
+---
+
+**Vuoi che inizi a scrivere lo script narrativo per il Capitolo 1 (Marte - Il Sogno) o preferisci passare alla configurazione tecnica del repository GitHub?**
+
+*Seguimi su Instagram per vedere il dietro le quinte di "Oltre il Mito"!*
