@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>BEYOND THE MYTH | NASA Space Cartography</title>
+    
+    <!-- LIBRERIE ESTERNE -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    
+    <!-- FONT E ICONE -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "inverse-primary": "#0033cc",
+                "surface": "#ffffff", 
+                "on-surface": "#001a4d", 
+                "primary": "#003399", 
+                "secondary": "#0055ff", 
+                "tertiary": "#0033cc",
+                "surface-variant": "#001a4d", 
+                "on-surface-variant": "#ffffff", 
+                "outline-variant": "#0055ff",
+              },
+              fontFamily: {
+                "headline": ["Space Grotesk"],
+                "body": ["Inter"],
+                "label": ["Inter"]
+              },
+              borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+            },
+          },
+        }
+    </script>
+
+    <style>
+        /* CONFIGURAZIONE ICONE */
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+
+        /* GRIGLIA DI SFONDO */
+        body {
+            background-color: #ffffff;
+            background-image: 
+                linear-gradient(rgba(0, 85, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 85, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            scroll-behavior: smooth;
+        }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #f0f0f0; }
+        ::-webkit-scrollbar-thumb { background: #003399; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        section {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(5px);
+        }
+
+        /* BOTTONE HERO CON EFFETTO GLOW CORRETTO */
+        .btn-hero {
+            margin-top: 2.5rem;
+            padding: 1.3em 3em;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            font-weight: 600;
+            color: #001a4d;
+            background-color: #fff;
+            border: none;
+            border-radius: 45px;
+            box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            outline: none;
+            font-family: 'Space Grotesk', sans-serif;
+            z-index: 20;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        .btn-hero:hover {
+            background-color: #003399; /* Blu primario corretto */
+            box-shadow: 0px 15px 30px rgba(0, 51, 153, 0.5); /* Ombra in tema */
+            color: #fff;
+            transform: translateY(-5px) scale(1.02);
+        }
+        .btn-hero:hover::after {
+            left: 100%;
+        }
+
+        /* STILI PER TIMELINE E IMMAGINI */
+        .blueprint-img {
+            border: 1px solid rgba(0, 85, 255, 0.1);
+        }
+        
+        .planet-img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .timeline-track::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background-color: rgba(0, 85, 255, 0.2);
+            z-index: 0; /* Modificato z-index per stare sotto al cerchio bianco */
+        }
+
+        /* ANIMAZIONI APPLE-STYLE */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(30px);
+            filter: blur(8px);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0px);
+        }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+
+        /* TRANSIZIONI TIMELINE CINEMATICHE */
+        .timeline-slide {
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ACCORDION STYLES */
+        .accordion-content {
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+        }
+        .accordion-item.active .accordion-content {
+            opacity: 1;
+        }
+        .accordion-item.active .icon {
+            transform: rotate(135deg);
+        }
+
+        /* SIDEBAR ACTIVE STATE */
+        .sidebar-active {
+            opacity: 1 !important;
+            color: #ffffff;
+        }
+        .sidebar-active span {
+            font-variation-settings: 'FILL' 1 !important;
+        }
+    </style>
+</head>
+<body class="text-on-surface font-body overflow-x-hidden selection:bg-primary selection:text-white">
+
+    <!-- BARRA LATERALE (Minimale con ancoraggi) -->
+    <aside class="fixed left-0 h-full w-24 border-r border-[#0055ff]/30 bg-[#001a4d] hidden md:flex flex-col items-center py-10 z-40 text-white justify-between">
+        
+        <div class="flex flex-col gap-6 items-center w-full reveal-element is-visible delay-100 mt-4">
+            
+            <button onclick="scrollToSection('hero-section')" class="sidebar-link sidebar-active group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-xl transition-all" style="font-variation-settings: 'FILL' 0;">home</span>
+                <span class="font-label text-[8px] tracking-widest uppercase">INTRO</span>
+            </button>
+            
+            <button onclick="scrollToSection('timeline-section')" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full mt-2 transition-all focus:outline-none">
+                <!-- Nuova Icona Solar System Proporzionata -->
+                <div class="flex items-center gap-[3px] mb-1">
+                    <div class="w-[5px] h-[5px] rounded-full border-[1px] border-current"></div>
+                    <div class="w-[10px] h-[10px] rounded-full border-[1.5px] border-current"></div>
+                    <div class="w-[14px] h-[14px] rounded-full border-[1.5px] border-current"></div>
+                </div>
+                <span class="font-label text-[7px] tracking-tighter uppercase text-center leading-tight">SOLAR<br/>SYSTEM</span>
+            </button>
+
+            <div class="w-8 h-[1px] bg-white/20 my-2"></div>
+            
+            <!-- Link ai Pianeti -->
+            <button onclick="openPlanet(0)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">MERCURY</span>
+            </button>
+            <button onclick="openPlanet(1)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">VENUS</span>
+            </button>
+            <button onclick="openPlanet(2)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">EARTH</span>
+            </button>
+            <button onclick="openPlanet(3)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">MARS</span>
+            </button>
+            <button onclick="openPlanet(4)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">JUPITER</span>
+            </button>
+            <button onclick="openPlanet(5)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">SATURN</span>
+            </button>
+            <button onclick="openPlanet(6)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">URANUS</span>
+            </button>
+            <button onclick="openPlanet(7)" class="sidebar-link group flex flex-col items-center gap-1 cursor-pointer opacity-40 hover:opacity-100 w-full transition-all focus:outline-none">
+                <span class="material-symbols-outlined text-base">radio_button_checked</span>
+                <span class="font-label text-[7px] tracking-wider uppercase">NEPTUNE</span>
+            </button>
+        </div>
+
+        <div class="mt-auto flex flex-col items-center w-full reveal-element is-visible delay-200">
+            <span class="material-symbols-outlined cursor-pointer text-white/40 hover:text-white transition-colors text-2xl" title="Change Language">translate</span>
+        </div>
+    </aside>
+
+    <main class="md:ml-24">
+
+        <!-- SEZIONE HERO -->
+        <section id="hero-section" class="scroll-target relative h-screen flex flex-col justify-center items-center p-8 md:p-20 overflow-hidden !bg-black text-center">
+            <div class="absolute inset-0 z-0 bg-black">
+                <img id="hero-img" class="w-full h-full object-cover opacity-60" src="https://images-assets.nasa.gov/image/PIA04921/PIA04921~orig.jpg" alt="[Immagine dello Spazio Profondo NASA]"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+            </div>
+            
+            <div id="hero-content" class="relative z-10 max-w-6xl flex flex-col items-center">
+                <h1 class="reveal-element font-headline text-5xl md:text-8xl lg:text-9xl font-bold text-white tracking-[0.05em] leading-none mb-8 uppercase whitespace-nowrap drop-shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+                    BEYOND THE MYTH
+                </h1>
+                <p class="reveal-element delay-100 font-headline text-xl md:text-2xl text-white/90 max-w-3xl tracking-widest uppercase font-light leading-relaxed">
+                    the evolution of space cartography
+                </p>
+                <button class="reveal-element delay-200 btn-hero hover-trigger" onclick="scrollToSection('intent')">
+                    Discover Mission
+                </button>
+            </div>
+        </section>
+
+        <!-- INTRODUZIONE PROGETTO -->
+        <section id="intent" class="py-32 px-8 md:px-20 border-y border-[#0055ff]/10 !bg-[#001a4d] text-white relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#0055ff]/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
+            
+            <div class="max-w-4xl mx-auto flex flex-col items-center text-center relative z-10">
+                <h2 class="reveal-element font-headline text-white/50 text-xs tracking-[0.3em] uppercase mb-6 font-bold">Project Intent</h2>
+                <p class="reveal-element delay-100 font-headline text-2xl md:text-4xl text-white mb-12 leading-tight font-medium max-w-3xl text-balance">
+                    Investigating the evolution of space cartography by comparing speculative imagery with NASA's scientific evidence.
+                </p>
+                <div class="grid md:grid-cols-2 gap-12 text-white/70 font-light leading-relaxed text-justify reveal-element delay-200">
+                    <p>The core objective is the "correction" of celestial proportions. By analyzing official NASA datasets—diameters, orbital distances, and physical coordinates—the experience exposes the discrepancy between early mythological representations and the measurable reality of the solar system.</p>
+                    <p>From ancient speculative maps to nearly 70 years of NASA activity, we explore how our perception of the cosmos shifted from a divine aesthetic to a "hard" cartographic truth based on empirical telemetry.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- MACRO-SEZIONE: TIMELINE -->
+        <div id="timeline-section" class="scroll-target bg-white py-32 px-4 md:px-12 overflow-hidden relative">
+            
+            <div class="max-w-4xl mx-auto text-center mb-24 reveal-element">
+                <h2 class="font-headline text-primary text-xs tracking-[0.3em] uppercase mb-6 font-bold">00 Cartographic Evolution</h2>
+                <p class="font-headline text-3xl md:text-5xl text-on-surface mb-8 leading-tight font-medium uppercase tracking-tighter">A Timeline of the Cosmos</p>
+                <p class="text-on-surface/70 font-light leading-relaxed text-justify max-w-3xl mx-auto">
+                    The representation of the Solar System has undergone a profound paradigm shift. Explore the interactive timeline below to trace the evolution from theological "crystalline spheres" to modern aerospace telemetry.
+                </p>
+            </div>
+
+            <!-- CONTENITORE SLIDER -->
+            <div class="relative w-full max-w-[1400px] mx-auto mb-16 reveal-element delay-100 grid items-start">
+                
+                <!-- SLIDE 1 -->
+                <div id="slide-0" class="timeline-slide col-start-1 row-start-1 w-full flex flex-col md:flex-row gap-12 items-center opacity-100 translate-x-0 scale-100 blur-0 z-10">
+                    <div class="flex-1 md:flex-[0.8] space-y-6 px-4 md:px-8">
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase">2nd Century CE</span>
+                        <h3 class="font-headline text-3xl md:text-4xl font-bold text-on-surface leading-tight">The Geocentric Myth:<br>Crystalline Spheres</h3>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">For over a millennium, cartography was driven by the quest for divine perfection. Formalized by <strong>Claudius Ptolemy</strong>, the universe was mapped as a series of concentric, crystalline spheres with Earth immovably fixed at the center.</p>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">To explain planetary motion, Ptolemy introduced <strong>epicycles</strong>—complex circles upon circles. Celestial maps were theological art pieces, illustrating a perfect geometric hierarchy made of an incorruptible element called <em>Aether</em>.</p>
+                    </div>
+                    <div class="flex-1 md:flex-[1.2] w-full">
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://pdr-assets.b-cdn.net/collections/the-celestial-atlas-of-andreas-cellarius-1660/cellarius-seasons-banner.jpeg', 'Harmonia Macrocosmica (A. Cellarius, 1660)')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://pdr-assets.b-cdn.net/collections/the-celestial-atlas-of-andreas-cellarius-1660/cellarius-seasons-banner.jpeg" alt="[Ptolemaic System]" class="w-full max-w-[800px] h-[350px] md:h-[500px] object-contain group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-4 mt-2 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">Harmonia Macrocosmica (A. Cellarius, 1660)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div id="slide-1" class="timeline-slide col-start-1 row-start-1 w-full flex flex-col md:flex-row-reverse gap-12 items-center opacity-0 translate-x-12 scale-95 blur-md pointer-events-none z-0">
+                    <div class="flex-1 md:flex-[0.8] space-y-6 px-4 md:px-8">
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase">1543</span>
+                        <h3 class="font-headline text-3xl md:text-4xl font-bold text-on-surface leading-tight">The Heliocentric Shift:<br>Displacement of Earth</h3>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">The publication of <strong>Nicolaus Copernicus's</strong> heliocentric theory marked the first major dismantling of the ancient myth. By placing the Sun at the center and reducing Earth to an orbiting planet, Copernicus simplified the cartographic model.</p>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">This shift eliminated the need for most of Ptolemy's convoluted epicycles, offering a more elegant solution. However, Copernicus still clung to the ancient belief that orbits must be perfectly circular.</p>
+                    </div>
+                    <div class="flex-1 md:flex-[1.2] w-full">
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://cdn.britannica.com/82/7782-050-23FC170C/Engraving-Nicolaus-Copernicus-solar-system-illustration-De.jpg', 'De revolutionibus orbium coelestium (1543)')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://cdn.britannica.com/82/7782-050-23FC170C/Engraving-Nicolaus-Copernicus-solar-system-illustration-De.jpg" alt="[Copernican Diagram]" class="w-full max-w-[800px] h-[350px] md:h-[500px] object-contain mx-auto group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-4 mt-2 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">De revolutionibus orbium coelestium (1543)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div id="slide-2" class="timeline-slide col-start-1 row-start-1 w-full flex flex-col md:flex-row gap-12 items-center opacity-0 translate-x-12 scale-95 blur-md pointer-events-none z-0">
+                    <div class="flex-1 md:flex-[0.8] space-y-6 px-4 md:px-8">
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase">1588</span>
+                        <h3 class="font-headline text-3xl md:text-4xl font-bold text-on-surface leading-tight">The Tychonic Compromise:<br>A Geo-Heliocentric Map</h3>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">Before the telescope, <strong>Tycho Brahe</strong> made the most accurate naked-eye observations in history. Unable to accept a moving Earth for physical and theological reasons, he mapped a unique compromise.</p>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">In the Tychonic system, Earth remained stationary at the center with the Sun and Moon orbiting it, but all other planets orbited the Sun. This model perfectly matched observational data while preserving the ancient myth of a central Earth.</p>
+                    </div>
+                    <div class="flex-1 md:flex-[1.2] w-full">
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://upload.wikimedia.org/wikipedia/commons/9/91/Tychonian.png', 'The Tychonic System Diagram')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Tychonian.png" alt="[Tychonic System]" class="w-full max-w-[800px] h-[350px] md:h-[500px] object-contain mx-auto group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-4 mt-2 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">The Tychonic System Diagram</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 4 -->
+                <div id="slide-3" class="timeline-slide col-start-1 row-start-1 w-full flex flex-col md:flex-row-reverse gap-12 items-start opacity-0 translate-x-12 scale-95 blur-md pointer-events-none z-0">
+                    <div class="flex-1 md:flex-[0.8] space-y-6 px-4 md:px-8 md:sticky md:top-10">
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase">1609 — 1687</span>
+                        <h3 class="font-headline text-3xl md:text-4xl font-bold text-on-surface leading-tight">The Mechanical Universe:<br>Ellipses & Gravity</h3>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">The definitive death of the crystalline spheres came through data. <strong>Johannes Kepler</strong> concluded that planets move in <strong>ellipses</strong>. The representation of the cosmos was now bound to mathematical laws.</p>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">Concurrently, <strong>Galileo</strong> used the telescope to prove celestial bodies were physical, imperfect masses. Finally, <strong>Isaac Newton</strong> provided the gravitational mechanics that held this new map together.</p>
+                    </div>
+                    <div class="flex-1 md:flex-[1.2] w-full flex flex-col gap-6">
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://assets-us-01.kc-usercontent.com/9dd25524-761a-000d-d79f-86a5086d4774/7d17bc5d-0f03-42a7-b31f-be9b077c9853/Kepler%2031%20tile.jpg?w=512&h=558&auto=format&q=75&fit=crop', 'Kepler\'s Model')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://assets-us-01.kc-usercontent.com/9dd25524-761a-000d-d79f-86a5086d4774/7d17bc5d-0f03-42a7-b31f-be9b077c9853/Kepler%2031%20tile.jpg?w=512&h=558&auto=format&q=75&fit=crop" alt="[Kepler's Model]" class="w-full max-w-[800px] h-[180px] md:h-[230px] object-contain group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-2 mt-1 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">Kepler's Model</p>
+                        </div>
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://rhapsodyinbooks.wordpress.com/wp-content/uploads/2017/06/starry-6.jpg', 'Galileo\'s Moon (1610)')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://rhapsodyinbooks.wordpress.com/wp-content/uploads/2017/06/starry-6.jpg" alt="[Galileo's Moon]" class="w-full max-w-[800px] h-[180px] md:h-[230px] object-contain group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-2 mt-1 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">Galileo's Moon (1610)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 5 -->
+                <div id="slide-4" class="timeline-slide col-start-1 row-start-1 w-full flex flex-col md:flex-row gap-12 items-start opacity-0 translate-x-12 scale-95 blur-md pointer-events-none z-0">
+                    <div class="flex-1 md:flex-[0.8] space-y-6 px-4 md:px-8 md:sticky md:top-10">
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase">18th — 19th Century</span>
+                        <h3 class="font-headline text-3xl md:text-4xl font-bold text-on-surface leading-tight">The Clockwork Expansion:<br>Predictive Cartography</h3>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">As Newtonian physics took hold, the Solar System was mapped as a grand, predictable clockwork mechanism. This era saw the creation of intricate <strong>Orreries</strong>—mechanical models representing orbital periods.</p>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">Cartography became predictive: mathematicians noticed anomalies in Uranus's orbit and successfully mapped the exact location of a new planet, <strong>Neptune</strong>, before it was seen through a telescope.</p>
+                    </div>
+                    <div class="flex-1 md:flex-[1.2] w-full flex flex-col gap-6">
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://i.ebayimg.com/images/g/pwEAAOSw5Hlh4kW4/s-l1600.webp', 'Wright\'s Grand Orrery')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://i.ebayimg.com/images/g/pwEAAOSw5Hlh4kW4/s-l1600.webp" alt="[Grand Orrery]" class="w-full max-w-[800px] h-[180px] md:h-[230px] object-contain group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-2 mt-1 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">Wright's Grand Orrery</p>
+                        </div>
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://www.whipplemuseum.cam.ac.uk/sites/default/files/styles/16_9_full_width_xl_2x/public/1275_orrery_4-copy.webp?h=f7d9296c&itok=9jUqhNoJ', 'Mechanical Details')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://www.whipplemuseum.cam.ac.uk/sites/default/files/styles/16_9_full_width_xl_2x/public/1275_orrery_4-copy.webp?h=f7d9296c&itok=9jUqhNoJ" alt="[Orrery Details]" class="w-full max-w-[800px] h-[180px] md:h-[230px] object-contain group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-2 mt-1 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">Mechanical Details</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 6 -->
+                <div id="slide-5" class="timeline-slide col-start-1 row-start-1 w-full flex flex-col md:flex-row-reverse gap-12 items-center opacity-0 translate-x-12 scale-95 blur-md pointer-events-none z-0">
+                    <div class="flex-1 md:flex-[0.8] space-y-6 px-4 md:px-8">
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase">1957 — Present</span>
+                        <h3 class="font-headline text-3xl md:text-4xl font-bold text-on-surface leading-tight">The Empirical Era:<br>Aerospace Telemetry</h3>
+                        <p class="text-on-surface/80 font-light leading-relaxed text-justify">With the Space Age, NASA transformed cartography from passive observation to active probing using Deep Space Network (DSN) and spectroscopy. We no longer map just light, but gravity, radiation, and chemical signatures.</p>
+                        <div class="border-l-2 border-primary pl-4 mt-4">
+                            <span class="block text-[10px] font-mono text-primary uppercase mb-1 font-bold tracking-widest">Mass Distribution</span>
+                            <span class="text-xl font-headline font-bold text-on-surface uppercase">99.86% Sol</span>
+                            <p class="text-[10px] text-on-surface/60 mt-1">The Sun dictates the orbital mechanics; planets are merely fractional debris.</p>
+                        </div>
+                    </div>
+                    <div class="flex-1 md:flex-[1.2] w-full">
+                        <div class="group cursor-pointer flex flex-col items-center" onclick="openLightbox('https://science.nasa.gov/wp-content/uploads/2023/10/edu-solar-system-large.png', 'Digital Trajectory Map (NASA)')">
+                            <div class="overflow-hidden w-full flex justify-center">
+                                <img src="https://science.nasa.gov/wp-content/uploads/2023/10/edu-solar-system-large.png" alt="[NASA Map]" class="w-full max-w-[800px] h-[350px] md:h-[500px] object-contain group-hover:scale-105 transition-transform duration-1000 ease-out"/>
+                            </div>
+                            <p class="pt-4 mt-2 text-[10px] text-center text-on-surface/60 font-mono uppercase tracking-widest">Digital Trajectory Map (NASA)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BARRA DI NAVIGAZIONE TIMELINE -->
+            <div class="relative max-w-6xl mx-auto py-8 reveal-element delay-300 overflow-x-auto no-scrollbar mt-12 md:mt-0">
+                <div class="timeline-track relative flex justify-between items-center min-w-[600px] px-4 md:px-8">
+                    <script>
+                        const labels = ["Antiquity", "1543", "1588", "1609", "18th C.", "Present"];
+                        const timelineImages = [
+                            "https://pdr-assets.b-cdn.net/collections/the-celestial-atlas-of-andreas-cellarius-1660/cellarius-seasons-banner.jpeg",
+                            "https://cdn.britannica.com/82/7782-050-23FC170C/Engraving-Nicolaus-Copernicus-solar-system-illustration-De.jpg",
+                            "https://upload.wikimedia.org/wikipedia/commons/9/91/Tychonian.png",
+                            "https://assets-us-01.kc-usercontent.com/9dd25524-761a-000d-d79f-86a5086d4774/7d17bc5d-0f03-42a7-b31f-be9b077c9853/Kepler%2031%20tile.jpg?w=512&h=558&auto=format&q=75&fit=crop",
+                            "https://i.ebayimg.com/images/g/pwEAAOSw5Hlh4kW4/s-l1600.webp",
+                            "https://science.nasa.gov/wp-content/uploads/2023/10/edu-solar-system-large.png"
+                        ];
+
+                        for(let i=0; i<6; i++) {
+                            // Nota: il button contenitore NON ha opacità, altrimenti il cerchio bianco diventa trasparente. 
+                            // L'opacità e l'effetto bianco/nero vengono applicati solo all'immagine interna.
+                            document.write(`
+                            <button class="nav-btn hover-trigger group flex flex-col items-center gap-3 px-2 cursor-pointer focus:outline-none transition-all duration-300" onclick="switchSlide(${i})">
+                                <div id="btn-circle-${i}" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-white relative z-10 ${i===0 ? 'border-[3px] border-primary scale-110 shadow-[0_5px_15px_rgba(0,85,255,0.2)] p-[2px]' : 'border-2 border-on-surface/20 p-[2px]'} flex items-center justify-center transition-all duration-500 ease-out overflow-hidden">
+                                    <img id="btn-img-${i}" src="${timelineImages[i]}" class="w-full h-full object-cover rounded-full ${i===0 ? '' : 'grayscale opacity-40 group-hover:opacity-80'} transition-all duration-300" alt="Thumbnail" />
+                                </div>
+                                <span id="btn-text-${i}" class="text-[9px] md:text-[10px] font-bold ${i===0 ? 'text-primary' : 'text-on-surface opacity-50 group-hover:opacity-100'} uppercase tracking-widest transition-colors duration-300">${labels[i]}</span>
+                            </button>
+                            `);
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <!-- DATABASE PLANETARIO -->
+        <div id="planets-list" class="scroll-target bg-[#f8f9fb] py-32">
+            
+            <div class="max-w-4xl mx-auto text-center px-8 md:px-20 mb-20 reveal-element">
+                <h2 class="font-headline text-primary text-xs tracking-[0.3em] uppercase mb-6 font-bold">Planetary Archive</h2>
+                <p class="font-headline text-3xl md:text-5xl text-on-surface mb-8 leading-tight font-medium uppercase tracking-tighter">Myth vs. Telemetry</p>
+                <p class="text-on-surface/70 font-light leading-relaxed text-justify max-w-3xl mx-auto">
+                    Explore the celestial bodies of our solar system. This database contrasts the ancient mythological perceptions with the hard data gathered by modern aerospace missions. Select a planet below to discover its transformation from a wandering deity to a measurable physical world.
+                </p>
+            </div>
+            
+            <div class="w-full reveal-element delay-100">
+                <div id="accordion-container" class="border-t border-[#0055ff]/20"></div>
+                
+                <script>
+                    const planets = [
+                        { id: '01', name: 'MERCURY', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mercury_in_true_color.jpg/800px-Mercury_in_true_color.jpg', desc: 'The smallest and innermost planet in the Solar System. Its orbit is highly eccentric, providing early proof for Einstein’s General Relativity.' },
+                        { id: '02', name: 'VENUS', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Venus-real_color.jpg/800px-Venus-real_color.jpg', desc: 'A terrestrial planet with a dense atmosphere causing a runaway greenhouse effect. Mapped extensively by the Magellan spacecraft using SAR.' },
+                        { id: '03', name: 'EARTH', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/The_Earth_seen_from_Apollo_17.jpg/800px-The_Earth_seen_from_Apollo_17.jpg', desc: 'The only astronomical object known to harbor life. Once the center of our cartographic myth, now a pale blue dot in telemetry.' },
+                        { id: '04', name: 'MARS', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/800px-OSIRIS_Mars_true_color.jpg', desc: 'The Red Planet. Currently the most mapped terrestrial body besides Earth, hosting rovers that send daily geological telemetry.' },
+                        { id: '05', name: 'JUPITER', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Jupiter.jpg/800px-Jupiter.jpg', desc: 'A gas giant whose moons were observed by Galileo, effectively shattering the Aristotelian model of perfect celestial spheres.' },
+                        { id: '06', name: 'SATURN', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/800px-Saturn_during_Equinox.jpg', desc: 'A gas giant with an extensive ring system. Extensively mapped by the Cassini-Huygens mission over a 13-year orbital period.' },
+                        { id: '07', name: 'URANUS', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Uranus2.jpg/800px-Uranus2.jpg', desc: 'An ice giant with a unique 98-degree axial tilt. The first planet discovered using a telescope (William Herschel, 1781).' },
+                        { id: '08', name: 'NEPTUNE', img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Neptune_-_Voyager_2_%2829777304466%29.png/800px-Neptune_-_Voyager_2_%2829777304466%29.png', desc: 'The outermost known solar planet. Its existence and position were cartographically predicted by mathematical models before visual observation.' }
+                    ];
+
+                    const container = document.getElementById('accordion-container');
+                    planets.forEach((p, index) => {
+                        container.innerHTML += `
+                            <div class="accordion-item border-b border-[#0055ff]/10 group w-full" id="planet-section-${index}">
+                                <button id="planet-btn-${index}" class="hover-trigger w-full flex items-center justify-between py-10 px-8 md:px-24 hover:bg-white transition-colors duration-300 text-left text-on-surface" onclick="toggleAccordion(this)">
+                                    <div class="flex items-center gap-8 md:gap-16">
+                                        <span class="font-headline text-primary/30 text-xl md:text-3xl font-bold group-hover:text-primary transition-colors duration-300">${p.id}</span>
+                                        <span class="font-headline text-3xl md:text-5xl tracking-[0.2em] uppercase font-bold text-on-surface group-hover:translate-x-4 transition-transform duration-300">${p.name}</span>
+                                    </div>
+                                    <span class="icon material-symbols-outlined text-primary text-4xl transition-transform duration-500 ease-in-out">add</span>
+                                </button>
+                                <div class="accordion-content bg-white w-full">
+                                    <div class="max-w-7xl mx-auto p-8 md:px-24 md:py-16 flex flex-col md:flex-row gap-16 items-center">
+                                        <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden border border-on-surface/10 flex-shrink-0 relative group-hover:shadow-2xl transition-shadow duration-500">
+                                            <img src="${p.img}" alt="[Immagine di ${p.name}]" class="planet-img w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s] ease-out">
+                                        </div>
+                                        <div class="flex-1">
+                                            <p class="font-headline text-primary text-[10px] tracking-widest uppercase mb-4 font-bold border-b border-primary/20 pb-2 inline-block">Orbital Data / Telemetry Profile</p>
+                                            <p class="text-on-surface/80 font-light leading-relaxed text-justify mb-8 text-lg md:text-xl">${p.desc}</p>
+                                            <a href="#" class="hover-trigger inline-flex items-center gap-2 px-8 py-4 border border-primary text-primary font-bold text-[10px] tracking-widest uppercase hover:bg-primary hover:text-white transition-colors duration-300 rounded-full">
+                                                Access Full Telemetry <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                </script>
+            </div>
+        </div>
+
+        <!-- NUOVA SEZIONE: ARCHIVE SOURCES -->
+        <section id="sources" class="py-24 px-8 md:px-20 border-t border-[#0055ff]/10 bg-white">
+            <div class="max-w-6xl mx-auto reveal-element">
+                <h2 class="font-headline text-on-surface/40 text-xs tracking-[0.3em] uppercase mb-12 font-bold border-b border-on-surface/10 pb-4">Archive Sources & Citations</h2>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div>
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase block mb-2">Historical Cartography</span>
+                        <p class="text-sm text-on-surface/70 leading-relaxed">Ptolemy, C. (c. 150). <em>Almagest</em>.<br/>Copernicus, N. (1543). <em>De revolutionibus orbium coelestium</em>.<br/>Cellarius, A. (1660). <em>Harmonia Macrocosmica</em>. (Public Domain Review).</p>
+                    </div>
+                    <div>
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase block mb-2">Observational Data</span>
+                        <p class="text-sm text-on-surface/70 leading-relaxed">Kepler, J. (1596). <em>Mysterium Cosmographicum</em>.<br/>Galilei, G. (1610). <em>Sidereus Nuncius</em>. Moon phase sketches and Jupiter's satellite telemetry.</p>
+                    </div>
+                    <div>
+                        <span class="text-primary font-bold tracking-widest text-[10px] uppercase block mb-2">Modern Telemetry</span>
+                        <p class="text-sm text-on-surface/70 leading-relaxed">NASA Science Planetary Database.<br/>Jet Propulsion Laboratory (JPL) Deep Space Network (DSN) trajectories and raw spectral data.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER RICCO -->
+        <footer class="w-full bg-[#001a4d] text-white pt-24 pb-12 px-8 md:px-20 border-t border-[#0055ff]/30 reveal-element">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="text-xl font-bold tracking-widest font-headline uppercase mb-4">BEYOND THE MYTH</div>
+                    <p class="text-white/50 text-sm font-light max-w-sm leading-relaxed">A digital cartographic project investigating the transition from ancient celestial mythology to empirical aerospace telemetry and observation.</p>
+                </div>
+                <div>
+                    <h4 class="font-headline text-xs tracking-[0.2em] uppercase font-bold mb-4 text-white/80">Navigation</h4>
+                    <ul class="space-y-2 text-sm text-white/50 font-light">
+                        <li><a href="#" onclick="scrollToSection('hero-section')" class="hover:text-primary transition-colors">Intro</a></li>
+                        <li><a href="#" onclick="scrollToSection('intent')" class="hover:text-primary transition-colors">Project Intent</a></li>
+                        <li><a href="#" onclick="scrollToSection('timeline-section')" class="hover:text-primary transition-colors">Timeline</a></li>
+                        <li><a href="#" onclick="scrollToSection('planets-list')" class="hover:text-primary transition-colors">Database</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-headline text-xs tracking-[0.2em] uppercase font-bold mb-4 text-white/80">Agency</h4>
+                    <ul class="space-y-2 text-sm text-white/50 font-light">
+                        <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">NASA DSN</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">Public Domain Review</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="max-w-6xl mx-auto border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 font-label text-[9px] uppercase tracking-[0.3em]">
+                <span>© 2026 ARCHIVAL TELEMETRY - BEYOND THE MYTH</span>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-[#001a4d]/95 backdrop-blur-md hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300 p-4 md:p-12" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 md:top-8 md:right-8 text-white hover:text-primary transition-colors focus:outline-none z-50">
+            <span class="material-symbols-outlined text-3xl md:text-4xl">close</span>
+        </button>
+        <div class="w-full h-full flex flex-col items-center justify-center">
+            <img id="lightbox-img" src="" alt="[Enlarged view]" class="max-w-full max-h-[80vh] object-contain shadow-2xl cursor-default mx-auto" onclick="event.stopPropagation()">
+            <p id="lightbox-caption" class="text-white/80 font-mono text-xs md:text-sm mt-6 uppercase tracking-widest text-center mx-auto"></p>
+        </div>
+    </div>
+
+    <!-- SCRIPT GESTIONE INTERAZIONI E NAVIGAZIONE -->
+    <script>
+        // 1. GESTIONE SCROLL FLUIDO
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if(el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // SCROLL VERSO IL SINGOLO PIANETA E APERTURA
+        function openPlanet(index) {
+            // Scrolla prima all'inizio della lista pianeti
+            document.getElementById('planets-list').scrollIntoView({ behavior: 'smooth' });
+            
+            // Aspetta che lo scroll sia completato e poi apri l'accordion corretto
+            setTimeout(() => {
+                const btn = document.getElementById(`planet-btn-${index}`);
+                if(btn) {
+                    const item = btn.parentElement;
+                    // Se non è già aperto, lo apre
+                    if(!item.classList.contains('active')) {
+                        toggleAccordion(btn);
+                    }
+                    // Aggiusta lo scroll per centrare il pianeta selezionato
+                    setTimeout(() => {
+                        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 300);
+                }
+            }, 600);
+        }
+
+        // SIDEBAR SCROLL SPY (Evidenzia link sidebar scorrendo)
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll('.scroll-target');
+            const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-50% 0px -50% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        sidebarLinks.forEach(link => {
+                            // Rimuovi classe attiva da tutti
+                            link.classList.remove('sidebar-active');
+                            link.classList.add('opacity-40');
+                            
+                            // Aggiungi a quello visibile
+                            if (link.getAttribute('onclick').includes(id)) {
+                                link.classList.add('sidebar-active');
+                                link.classList.remove('opacity-40');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(sec => observer.observe(sec));
+        });
+
+        // 2. APPLE-STYLE SCROLL ANIMATION (Blur & Scale Reveal)
+        document.addEventListener("DOMContentLoaded", () => {
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            
+            document.querySelectorAll('.reveal-element').forEach(el => revealObserver.observe(el));
+        });
+
+        // 3. LOGICA TIMELINE CINEMATICA
+        let currentSlide = 0;
+        function switchSlide(index) {
+            const totalSlides = 6;
+            
+            for(let i=0; i<totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                const btnCircle = document.getElementById(`btn-circle-${i}`);
+                const btnText = document.getElementById(`btn-text-${i}`);
+                const btnImg = document.getElementById(`btn-img-${i}`);
+
+                if(i === index) {
+                    // Animazione Entrata
+                    slide.classList.remove('opacity-0', 'translate-x-12', '-translate-x-12', 'pointer-events-none', 'z-0', 'scale-95', 'blur-md');
+                    slide.classList.add('opacity-100', 'translate-x-0', 'z-10', 'scale-100', 'blur-0');
+                    
+                    btnCircle.classList.remove('border-2', 'border-on-surface/20');
+                    btnCircle.classList.add('border-[3px]', 'border-primary', 'scale-110', 'shadow-[0_5px_15px_rgba(0,85,255,0.2)]');
+                    
+                    // Rimuove opacità e bianco/nero dall'immagine
+                    btnImg.classList.remove('grayscale', 'opacity-40');
+                    
+                    btnText.classList.remove('opacity-50');
+                    btnText.classList.replace('text-on-surface', 'text-primary');
+                } else {
+                    // Animazione Uscita Direzionale
+                    const directionClass = i < index ? '-translate-x-12' : 'translate-x-12';
+                    slide.classList.remove('opacity-100', 'translate-x-0', 'z-10', 'scale-100', 'blur-0', 'translate-x-12', '-translate-x-12');
+                    slide.classList.add('opacity-0', directionClass, 'pointer-events-none', 'z-0', 'scale-95', 'blur-md');
+                    
+                    btnCircle.classList.remove('border-[3px]', 'border-primary', 'scale-110', 'shadow-[0_5px_15px_rgba(0,85,255,0.2)]');
+                    btnCircle.classList.add('border-2', 'border-on-surface/20');
+                    
+                    // Aggiunge opacità e bianco/nero all'immagine
+                    btnImg.classList.add('grayscale', 'opacity-40');
+
+                    btnText.classList.add('opacity-50');
+                    btnText.classList.replace('text-primary', 'text-on-surface');
+                }
+            }
+            currentSlide = index;
+        }
+
+        // 4. LOGICA ACCORDION PIANETI
+        function toggleAccordion(btn) {
+            const item = btn.parentElement;
+            const content = item.querySelector('.accordion-content');
+            
+            document.querySelectorAll('.accordion-item.active').forEach(activeItem => {
+                if (activeItem !== item) {
+                    activeItem.classList.remove('active');
+                    activeItem.querySelector('.accordion-content').style.maxHeight = null;
+                }
+            });
+
+            item.classList.toggle('active');
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                setTimeout(() => content.style.maxHeight = content.scrollHeight + "px", 300);
+            } else {
+                content.style.maxHeight = null;
+            }
+        }
+
+        // 5. LOGICA LIGHTBOX IMMAGINI
+        function openLightbox(imgSrc, captionText) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            
+            lightboxImg.src = imgSrc;
+            lightboxCaption.textContent = captionText;
+            
+            lightbox.classList.remove('hidden');
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightbox.classList.add('opacity-100');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('opacity-100');
+            lightbox.classList.add('opacity-0');
+            
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                document.getElementById('lightbox-img').src = "";
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
