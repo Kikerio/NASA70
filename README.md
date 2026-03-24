@@ -1,57 +1,39 @@
-# media-interaction_sp2526
+# 🛸 OLTRE IL MITO
+### Confronto dimensionale e cartografico tra immaginario e realtà scientifica.
 
-Repository per il corso di **Media Interaction SP25/26** (SUPSI) – esercizi, prove e progetti.
+"Oltre il Mito" indaga l'evoluzione della nostra prospettiva spaziale attraverso i dati raccolti dalla NASA in quasi 70 anni di attività. Il progetto mette a confronto la struttura del sistema solare come veniva immaginata con l'evidenza scientifica delle dimensioni, collocazioni e distanze reali.
 
-## 📁 Struttura del repository
+---
 
-- `/esercizi/` – esercizi settimanali e sperimentazioni  
-- `/progetti/` – progetti principali del corso  
-- `/assets/` – immagini, video, font e altri file di supporto  
-- `/docs/` – documentazione, bozze e note  
+## 01. CONCEPT
+L'esperienza si focalizza sulla "correzione" delle proporzioni spaziali. Attraverso un percorso guidato, l'utente scopre come la realtà fisica del cosmo differisca radicalmente dalle prime rappresentazioni speculative e cartografiche prodotte prima della sistematica esplorazione spaziale.
 
-## 🧪 Esercizi
+---
 
-Breve overview degli esercizi principali.
+## 02. STRUTTURA NARRATIVA
+Il progetto segue una sequenza lineare e comparativa in tre fasi principali:
 
-- **Esercizio 01 – tracking satellite ISS**  
-  <img width="1499" height="863" alt="M I II_Es-01" src="https://github.com/user-attachments/assets/97fb70ea-554d-4123-b6f6-7951e65f578b" />
+1.  **L'UNIVERSO IMMAGINATO**: Visualizzazione iniziale del Sistema Solare e della Via Lattea secondo concezioni storiche e speculazioni visive (proporzioni, distanze e collocazioni errate).
+2.  **FOCUS PLANETARIO**: Un viaggio analitico attraverso i singoli pianeti. Per ogni tappa viene presentato un confronto diretto tra il "Prima" (rappresentazione basata sul mito o su osservazioni limitate) e il "Dopo" (modello basato sui dati effettivi NASA).
+3.  **L'UNIVERSO REALE**: Conclusione del viaggio con la rivelazione della Via Lattea reale, ricostruita secondo le scale e le coordinate fisiche fornite dagli archivi moderni.
 
-  - **Obiettivo:** esercizio introduttivo di tracciamento in tempo reale della posizione della Stazione Spaziale Internazionale.  
-  - **Tecnologie:** HTML, CSS, JavaScript, eventuali API per il tracking satellitare.  
-  - **Link:** https://kikerio.github.io/NASA70/iss_tracking/index.html
-    
-## 🚀 Progetti
+---
 
-### Progetto 01 – NASA 70
+## 03. ARCHIVIO DATI
+Il progetto utilizza archivi digitali ufficiali per garantire l'accuratezza del confronto scientifico:
 
-#### 00 — Brief del progetto
+* **STORIA E IMMAGINARIO**: Ricerca basata su NASA History e Internet Archive per il recupero di mappature storiche e illustrazioni concettuali.
+* **EVIDENZA SCIENTIFICA**: Utilizzo del NASA Photojournal e del Planetary Data System (PDS) per l'estrazione di diametri reali, distanze orbitali e texture fotografiche HD.
 
-Progetto del corso **Interaction Design (CV429.01)**: realizzare una pagina web divulgativa che usa gli archivi digitali della NASA (immagini, video, dati, documenti) per raccontare la conquista dello spazio a un pubblico generalista e curioso, con un’idea di visualizzazione chiara, coerente e ben contestualizzata.
+---
 
-#### 01 — Concept personale
+## 04. TECNOLOGIE
+* **Grafica 3D**: Three.js (per la modellazione dei volumi planetari e la gestione delle distanze).
+* **Animazioni**: GSAP (per la regia del movimento della camera tra le diverse scene).
+* **Linguaggio**: HTML, CSS, JavaScript Vanilla.
 
-|— Il mio concept parte da una domanda: _come si immaginava lo spazio prima di poterlo davvero vedere?_  
-|— L’obiettivo è mettere in relazione:  
-&nbsp;&nbsp;&nbsp;&nbsp;|— l’**immaginario pre-conquista** (illustrazioni, poster, cinema, fantascienza, visioni speculative dello spazio)  
-&nbsp;&nbsp;&nbsp;&nbsp;|— con le **immagini e i dati reali** prodotti dalla NASA dopo l’inizio dell’esplorazione spaziale  
+---
 
-|— La pagina web diventa così uno spazio narrativo che mostra il passaggio dallo **spazio come mito e fantasia** allo **spazio come realtà documentata e misurabile**, lavorando sul contrasto visivo e concettuale tra queste due epoche.
-
-#### 02 — Dettagli progetto
-
-|— **Tecnologie:** HTML, CSS, JavaScript (eventuali librerie come p5.js, Three.js, GSAP, ecc.).  
-|— **Stato:** in corso.  
-|— **Demo:** link (da aggiungere).  
-|— **Screenshot:** da aggiungere (work in progress).  
-
-## 🛠 Tecnologie & strumenti
-
-|— JavaScript  
-|— p5.js / Three.js (se utilizzate)  
-|— HTML / CSS  
-|— GitHub / Git  
-
-## 👤 Autrice
-
-- **Nome:** Michelle Chicherio  
-- **Ruolo:** Studentessa Visual Communication, SUPSI
+**Corso**: Interaction Design (CV429.01) – SUPSI  
+**Docenti**: Andreas Gysin, Giovanni Profeta  
+**Deliverable**: Progetto 1 – La conquista dello spazio
